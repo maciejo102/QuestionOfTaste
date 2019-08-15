@@ -1,0 +1,23 @@
+.item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: pre;
+
+  .index {
+      flex: 1;
+      word-break: break-all;
+      margin-right: 10px;
+  }
+
+  .material-icons {
+      color: #757575;
+      margin-right: 10px;
+  }
+}
+
+.selected-items {
+  display: flex;
+  align-items: center;
+}

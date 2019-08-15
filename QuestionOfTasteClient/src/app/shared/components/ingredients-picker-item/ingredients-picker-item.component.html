@@ -1,0 +1,11 @@
+<div class="item">
+  <mat-icon class="icon" svgIcon="ingredient">
+  </mat-icon>
+  <div style="line-height: 15px">
+    <div style="display:flex;">
+      <div style="width: 100%; display: flex">
+        <span [innerHtml]="ingredient.name | highlight: searchPattern"></span>
+      </div>
+    </div>
+  </div>
+</div>

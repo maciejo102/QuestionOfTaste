@@ -1,0 +1,24 @@
+:host {
+  width: 100%;
+  white-space: pre;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: nowrap;
+  mat-icon {
+      flex-grow: 0;
+      flex-shrink: 0;
+  }
+  mat-icon {
+      color: #757575;
+      margin-right: 10px;
+  }
+}
+
+.selected-items {
+  display: flex;
+  align-items: center;
+}

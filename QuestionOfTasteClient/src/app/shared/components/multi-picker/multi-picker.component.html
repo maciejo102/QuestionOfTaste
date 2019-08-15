@@ -1,0 +1,47 @@
+<div class="header" *ngIf="!disabled">
+  <mat-form-field appearance="legacy" floatLabel="never">
+    <input matInput [placeholder]="inputPlaceholder" [formControl]="inputCtrl" [matAutocomplete]="auto">
+    <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
+      <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+        <template [ngTemplateOutletContext]='{$implicit: item, searchPattern:searchPattern}' [ngTemplateOutlet]='selectedItemTmpl'></template>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-menu #appMenu="matMenu">
+    <template [ngTemplateOutlet]='commandsTemplate'></template>
+    <div *ngIf="!customMenuOnly">
+    <button *ngIf="!isAllItemsSelected && !allItemsSelectionDisabled" mat-menu-item (click)="selectAll()">
+      <mat-icon>select_all</mat-icon>{{selectAllLabel ? selectAllLabel:'All items'}}
+    </button>
+    <button mat-menu-item (click)="removeAll()">
+      <mat-icon>close</mat-icon> Usuń
+    </button>
+    </div>
+  </mat-menu>
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</div>
+<mat-list *ngIf="!isAllItemsSelected" class="selected-items" [ngClass]="{disabled: disabled}">
+  <mat-list-item *ngFor="let item of selectedItems">
+    <template [ngTemplateOutletContext]='{$implicit: item}' [ngTemplateOutlet]='selectedItemTmpl'></template>
+    <button mat-icon-button *ngIf="!disabled" (click)="removeItem(item)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
+<div *ngIf="isAllItemsSelected" class="centered">
+  <div>
+    <mat-chip-list>
+      <mat-chip (removed)="removeAll()">{{allItemsLabel ? allItemsLabel:'All items'}}
+        <mat-icon matChipRemove *forcomEditModeShow>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</div>
+<div *ngIf="!isAllItemsSelected && !selectedItems.length" class="centered">
+  <mat-chip-list>
+    <mat-chip>{{emptyListLabel ? emptyListLabel:'No items'}}</mat-chip>
+  </mat-chip-list>
+</div>

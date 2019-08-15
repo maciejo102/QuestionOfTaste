@@ -1,0 +1,13 @@
+<ng-template #ingredientTemplate let-ingredient let-searchPattern="searchPattern">
+  <qot-ingredients-picker-item [ingredient]="ingredient" [searchPattern]="searchPattern"></qot-ingredients-picker-item>
+</ng-template>
+<ng-template #commandsTemplate></ng-template>
+<qot-multi-picker [disabled]="disabled" [commandsTemplate]="commandsTemplate" [selectedItems]="selectedIngredients" [autocompleteSource]="boundIngredientsSource"
+  [isAllItemsSelected]="false" [inputPlaceholder]="inputPlaceholderText" [customMenuOnly]="false" [emptyListLabel]="emptyListLabelText"
+  [allItemsSelectionDisabled]="true" (itemRemoved)="removeItem($event)" (itemSelected)="selectItem($event)"
+  (allItemsRemoved)="removeAllItems()">
+  <ng-template let-item let-searchPattern="searchPattern">
+    <ng-container *ngTemplateOutlet="ingredientTemplate; context:{$implicit:item, isSuggestionTemplate:isSuggestionTemplate, searchPattern: searchPattern}">
+    </ng-container>
+  </ng-template>
+</qot-multi-picker>
