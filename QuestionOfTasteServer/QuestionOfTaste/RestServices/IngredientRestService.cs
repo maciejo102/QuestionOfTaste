@@ -8,7 +8,7 @@ using System.Text;
 
 namespace QuestionOfTaste.RestServices
 {
-    [Route("qot")]
+    [Route("ingredients-service")]
     public class IngredientRestService : Controller
     {
         [HttpGet("v1/ingredients"), HttpOptions(Name = "pattern")]
@@ -18,7 +18,7 @@ namespace QuestionOfTaste.RestServices
                 return new IngredientsPickerResponse { IngredientsPickerItems = new List<Ingredient>() };
 
             var ingredients = new[] { "ziemniaki", "cebula" };
-            var filteredIngredients = ingredients.Where(i => i.Contains(pattern)).Select(i => new Ingredient { Name = i });
+            var filteredIngredients = ingredients.Where(i => i.Contains(pattern)).Select(i => new Ingredient(i));
 
             var response = new IngredientsPickerResponse { IngredientsPickerItems = filteredIngredients };
 

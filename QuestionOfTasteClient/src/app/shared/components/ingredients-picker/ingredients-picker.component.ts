@@ -3,6 +3,7 @@ import { Component, OnInit, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { IngredientService } from 'src/app/services/ingredient.service';
 import { map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'qot-ingredients-picker',
@@ -18,10 +19,11 @@ import { map } from 'rxjs/operators';
 })
 export class IngredientsPickerComponent implements OnInit, ControlValueAccessor {
 
-  constructor(private ingredientsService: IngredientService) { }
+  constructor(private ingredientsService: IngredientService,
+    private translateService: TranslateService) { }
 
   public emptyListLabelText = 'pusto';
-  public inputPlaceholderText = 'dawaj!!';
+  public inputPlaceholderText: string;
 
   public boundIngredientsSource: Function;
   public selectedIngredients: Array<IIngredient> = [];
@@ -29,6 +31,11 @@ export class IngredientsPickerComponent implements OnInit, ControlValueAccessor 
 
   ngOnInit() {
     this.boundIngredientsSource = this.ingredientsSource.bind(this);
+
+    this.translateService.use('pl-PL');
+
+    // this.translateService.get(`INGREDIENTS.SEARCH`)
+    // .subscribe((res: string) => (this.inputPlaceholderText = res));
   }
 
   writeValue(ingredients: IIngredientsPickerItems): void {

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace QuestionOfTaste
 {
-    public class IngredientService
-    {   
-        public void WriteValue(string text)
-        {
-            Console.WriteLine(text);
-        }
-    }
+	public class IngredientService
+	{
+		public void WriteValue(string text)
+		{
+			Console.WriteLine(text);
+		}
+	}
 }

@@ -3,7 +3,7 @@
 </ng-template>
 <ng-template #commandsTemplate></ng-template>
 <qot-multi-picker [disabled]="disabled" [commandsTemplate]="commandsTemplate" [selectedItems]="selectedIngredients" [autocompleteSource]="boundIngredientsSource"
-  [isAllItemsSelected]="false" [inputPlaceholder]="inputPlaceholderText" [customMenuOnly]="false" [emptyListLabel]="emptyListLabelText"
+  [isAllItemsSelected]="false" [inputPlaceholder]="'INGREDIENTS.SEARCH' | translate" [customMenuOnly]="false" [emptyListLabel]="emptyListLabelText"
   [allItemsSelectionDisabled]="true" (itemRemoved)="removeItem($event)" (itemSelected)="selectItem($event)"
   (allItemsRemoved)="removeAllItems()">
   <ng-template let-item let-searchPattern="searchPattern">
