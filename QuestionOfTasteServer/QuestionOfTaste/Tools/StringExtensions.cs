@@ -1,21 +1,21 @@
 namespace QuestionOfTaste.Tools
 {
-    public static class StringExtensions
-    {
-        public static string GetStringBetween(this string strSource, string strStart, string strEnd)
+	public static class StringExtensions
 	{
-		if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+		public static string GetStringBetween(this string strSource, string strStart, string strEnd)
 		{
-			var start = strSource.IndexOf(strStart, 0) + strStart.Length;
-			var end = strSource.IndexOf(strEnd, start);
-			if (end == -1)
+			if (strSource.Contains(strStart) && strSource.Contains(strEnd))
 			{
-				end = strSource.Length;
+				var start = strSource.IndexOf(strStart, 0) + strStart.Length;
+				var end = strSource.IndexOf(strEnd, start);
+				if (end == -1)
+				{
+					end = strSource.Length;
+				}
+
+				return strSource.Substring(start, end - start).Trim();
 			}
-			
-			return strSource.Substring(start, end - start).Trim();
+			return "";
 		}
-		return "";
 	}
-    }
 }

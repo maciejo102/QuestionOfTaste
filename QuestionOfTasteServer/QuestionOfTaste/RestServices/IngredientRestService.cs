@@ -8,21 +8,30 @@ using System.Text;
 
 namespace QuestionOfTaste.RestServices
 {
-    [Route("ingredients-service")]
-    public class IngredientRestService : Controller
-    {
-        [HttpGet("v1/ingredients"), HttpOptions(Name = "pattern")]
-        public IngredientsPickerResponse GetIngredients(string pattern)
-        {
-            if (string.IsNullOrEmpty(pattern))
-                return new IngredientsPickerResponse { IngredientsPickerItems = new List<Ingredient>() };
+	[Route("ingredients-service")]
+	public class IngredientRestService : Controller
+	{
+		public IngredientRestService(DishesCache dishesCache)
+		{
+			this.dishesCache = dishesCache;
+		}
 
-            var ingredients = new[] { "ziemniaki", "cebula" };
-            var filteredIngredients = ingredients.Where(i => i.Contains(pattern)).Select(i => new Ingredient(i));
+		[HttpGet("v1/ingredients"), HttpOptions(Name = "pattern")]
+		public IngredientsPickerResponse GetIngredients(string pattern)
+		{
+			if (string.IsNullOrEmpty(pattern))
+				return new IngredientsPickerResponse { IngredientsPickerItems = new List<Ingredient>() };
 
-            var response = new IngredientsPickerResponse { IngredientsPickerItems = filteredIngredients };
+			var ingredients = dishesCache.IngredientDishIdsMap.Keys;
+			var filteredIngredients = ingredients.Where(i => i.Contains(pattern)).Select(i => new Ingredient(i));
 
-            return response;
-        }
-    }
+			Console.WriteLine("Filtered ingredients: {0}", filteredIngredients.Count());
+			var response = new IngredientsPickerResponse { IngredientsPickerItems = filteredIngredients };
+
+			return response;
+		}
+
+
+		private readonly DishesCache dishesCache;
+	}
 }

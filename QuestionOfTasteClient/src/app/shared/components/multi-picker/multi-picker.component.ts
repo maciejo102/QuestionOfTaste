@@ -15,7 +15,7 @@ export class MultiPickerComponent implements OnInit, OnDestroy {
 
   public inputCtrl = new FormControl();
 
-  @ContentChild(TemplateRef, /* TODO: add static flag */ { read: false }) public selectedItemTmpl: TemplateRef<Element>;
+  @ContentChild(TemplateRef) public selectedItemTmpl: TemplateRef<Element>;
 
   @Input()
   public commandsTemplate: TemplateRef<Element>;

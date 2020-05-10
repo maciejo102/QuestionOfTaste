@@ -12,7 +12,7 @@ namespace QuestionOfTaste
 
 			services.AddSingleton<IngredientService>();
 			services.AddSingleton<DishDeserializer>();
-			services.AddSingleton<ICache, DishesCache>();
+			services.AddSingleton<DishesCache>();
 			return services;
 		}
 	}
