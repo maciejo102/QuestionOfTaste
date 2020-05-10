@@ -1,7 +1,7 @@
 import { DomSanitizer } from '@angular/platform-browser';
 import { Component, Input } from '@angular/core';
 import { IIngredient } from 'src/app/models/ingredient.model';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'qot-ingredients-picker-item',

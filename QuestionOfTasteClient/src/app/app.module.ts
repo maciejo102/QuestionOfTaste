@@ -18,7 +18,7 @@ import localeUs from '@angular/common/locales/en-US-POSIX';
 import localePL from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { MAT_DATE_LOCALE } from '@angular/material';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 registerLocaleData(localeUs);
 registerLocaleData(localePL);

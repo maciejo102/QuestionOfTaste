@@ -1,7 +1,7 @@
 import { tap, debounceTime, switchMap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, OnDestroy, ContentChild, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 
 @Component({
