@@ -6,7 +6,7 @@ using QuestionOfTaste.Models;
 
 namespace QuestionOfTaste.Services
 {
-	[Route("dishes-service")]
+	[Route("qot/dishes-service")]
 	public class DishesRestService : Controller
 	{
 		public DishesRestService(DishesCache dishesCache)
@@ -24,7 +24,10 @@ namespace QuestionOfTaste.Services
 			{
 				try
 				{
-					dishIds.UnionWith(dishesCache.IngredientDishIdsMap[ingredient]);
+					if (dishIds.Count == 0)
+						dishIds.UnionWith(dishesCache.IngredientDishIdsMap[ingredient]);
+					else
+						dishIds.IntersectWith(dishesCache.IngredientDishIdsMap[ingredient]);
 				}
 				catch (KeyNotFoundException)
 				{

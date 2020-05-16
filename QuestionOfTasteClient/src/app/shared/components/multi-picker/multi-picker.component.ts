@@ -1,8 +1,9 @@
-import { tap, debounceTime, switchMap } from 'rxjs/operators';
+import { tap, debounceTime, switchMap, catchError } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, OnDestroy, ContentChild, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'qot-multi-picker',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class MultiPickerComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private snackbar: MatSnackBar) { }
 
   public inputCtrl = new FormControl();
 
@@ -71,9 +72,13 @@ export class MultiPickerComponent implements OnInit, OnDestroy {
       switchMap(pattern => {
         this.isBusy = true;
 
-        return this.autocompleteSource(pattern).pipe(tap(_ => {
-          this.isBusy = false;
-        }));
+        return this.autocompleteSource(pattern).pipe(catchError(error => {
+          this.snackbar.open('Error ' + error.statusText + ' (' + error.status + ')');
+          return of('');
+        }),
+          tap(_ => {
+            this.isBusy = false;
+          }));
       }),
     );
   }

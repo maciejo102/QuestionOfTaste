@@ -8,7 +8,7 @@ using System.Text;
 
 namespace QuestionOfTaste.RestServices
 {
-	[Route("ingredients-service")]
+	[Route("qot/ingredients-service")]
 	public class IngredientRestService : Controller
 	{
 		public IngredientRestService(DishesCache dishesCache)

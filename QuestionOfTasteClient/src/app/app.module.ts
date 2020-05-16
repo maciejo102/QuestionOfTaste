@@ -19,6 +19,9 @@ import localePL from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { DishResultComponent } from './dish-result/dish-result.component';
+import { DishService } from './services/dish.service';
+import { SharedMessageService } from './services/shared-message.service';
 
 registerLocaleData(localeUs);
 registerLocaleData(localePL);
@@ -41,6 +44,7 @@ export class ServiceLocator {
     MultiPickerComponent,
     IngredientsPickerComponent,
     IngredientsPickerItemComponent,
+    DishResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,8 @@ export class ServiceLocator {
   ],
   providers: [
     IngredientService,
+    DishService,
+    SharedMessageService,
     {
       provide: MAT_DATE_LOCALE, deps: [TranslateService],
       useFactory: (translateService: TranslateService) => {

@@ -1,0 +1,17 @@
+<div class="centered">
+
+	<mat-accordion *ngIf="(dishes$ | async) as dishes">
+		<mat-expansion-panel (opened)="panelOpenState = true"
+							 (closed)="panelOpenState = false" *ngFor="let dish of dishes"> 
+		  <mat-expansion-panel-header>
+			<mat-panel-title>
+			  {{ dish.name }}
+			</mat-panel-title>
+		  </mat-expansion-panel-header>
+		  <a href="{{ dish.link }}">link</a>
+		  <mat-list>
+			<mat-list-item *ngFor="let ingredientDetail of dish.ingredientDetails">{{ingredientDetail}}</mat-list-item>
+		  </mat-list>
+		</mat-expansion-panel>
+	  </mat-accordion>
+  </div>

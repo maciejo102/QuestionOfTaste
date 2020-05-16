@@ -1,12 +1,12 @@
   <div class="centered">
     <form [formGroup]="ingredientsForm">
 
-      <div class="ingredientsPicker">
+      <div>
         <qot-ingredients-picker formControlName="ingredientsPicker">
         </qot-ingredients-picker>
       </div>
 
-      <button mat-button>Szukaj</button>
+      <button mat-button (click)="showResults()">Szukaj</button>
     </form>
 
   </div>

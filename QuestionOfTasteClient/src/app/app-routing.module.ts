@@ -1,9 +1,11 @@
+import { DishResultComponent } from './dish-result/dish-result.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 
 const routes: Routes = [
-  { path: 'search', component: SearchPanelComponent }
+  { path: '', component: SearchPanelComponent },
+  { path: 'results', component: DishResultComponent }
 ];
 
 @NgModule({
