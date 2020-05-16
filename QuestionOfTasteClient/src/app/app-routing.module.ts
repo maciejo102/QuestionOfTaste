@@ -5,7 +5,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
 
 const routes: Routes = [
   { path: '', component: SearchPanelComponent },
-  { path: 'results', component: DishResultComponent }
+  { path: 'dishes/:ingredients', component: DishResultComponent }
 ];
 
 @NgModule({
