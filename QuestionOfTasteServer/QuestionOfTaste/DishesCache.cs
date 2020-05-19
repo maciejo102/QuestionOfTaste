@@ -9,12 +9,16 @@ namespace QuestionOfTaste
 {
 	public class DishesCache
 	{
+
 		public DishesCache(
 			DishDeserializer dishDeserializer,
 			IConfiguration config
 		)
 		{
-			this.inputDirectory = config["InputDirectory"];
+			Console.WriteLine("initialized");
+			this.inputDirectory = Environment.GetEnvironmentVariable("DATA_SOURCE") == "dummy"
+				? DummyDataDirectoryName
+				: config["InputDirectory"];
 			this.dishDeserializer = dishDeserializer;
 			Initialize();
 		}
@@ -58,6 +62,7 @@ namespace QuestionOfTaste
 		{
 			Dishes = new List<Dish>();
 			var inputFiles = Directory.EnumerateFiles(inputDirectory);
+
 			foreach (var path in inputFiles)
 			{
 				using (var reader = new StreamReader(path))
@@ -69,8 +74,8 @@ namespace QuestionOfTaste
 			}
 		}
 
+		private const string DummyDataDirectoryName = "DummyData";
 		private readonly string inputDirectory;
-
 		private readonly DishDeserializer dishDeserializer;
 	}
 }
