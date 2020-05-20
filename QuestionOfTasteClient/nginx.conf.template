@@ -26,13 +26,13 @@ http {
     include {{ .Env.NGINX_ADDITIONAL_FILES_PATH }}/*.conf;
 
     server {
-        listen 80;
-        server_name perspectiv_hybrid;
+        listen 8080;
+        server_name question-of-taste-client;
         client_max_body_size 50M;
         add_header Expires "-1";
         add_header Cache-Control "no-cache, must-revalidate, private";
 
-        root /opt/forcom/perspectiv;
+        root /opt/qot/question-of-taste-client;
         
         # Any route containing a file extension (e.g. /devicesfile.js)
 		location ~ ^.+\..+$ {

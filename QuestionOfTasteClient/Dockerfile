@@ -1,13 +1,18 @@
 FROM node:12.4.0
 
-WORKDIR /opt/qot/question-of-taste-client
-COPY package.json ./
+
+COPY . /src
+WORKDIR /src
 RUN npm install
 
 ENV PATH="./node_modules/.bin:$PATH" 
 
 RUN ng build --prod
-COPY ./dist .
+
+# RUN mkdir /opt/qot/question-of-taste-client
+# COPY ./dist /opt/qot/question-of-taste-client
+
+
 
 FROM nginx:stable-alpine
 
@@ -24,7 +29,12 @@ RUN mkdir -p /etc/nginx/conf.d/
 ENV NGINX_ADDITIONAL_FILES_PATH /etc/nginx/conf.d
 ENV NGINX_LOGS_FILES_PATH /var/log/nginx
 
+WORKDIR /opt/qot/question-of-taste-client
+COPY ./dist/QuestionOfTasteClient .
 COPY nginx.conf.template /etc/nginx
+
+VOLUME [ "/var/log/nginx" ]
+VOLUME [ "/etc/nginx/nginx.d" ]
 
 RUN mkdir -p /var/run
 
