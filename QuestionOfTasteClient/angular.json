@@ -147,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "QuestionOfTasteClient"
+  "defaultProject": "QuestionOfTasteClient",
+  "cli": {
+    "analytics": "a65d1e93-4fa7-4eb9-877c-05f75eeb4605"
+  }
 }

@@ -1,0 +1,49 @@
+user root;
+worker_processes 4;
+
+events {
+    worker_connections 2048;
+    multi_accept on;
+}
+
+http {
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 5;
+    types_hash_max_size 2048;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    log_format test '[$time_local] $status $remote_addr - to: $upstream_addr: $request upstream_response_time $upstream_response_time msec  $request_time';
+    error_log {{ .Env.NGINX_LOGS_FILES_PATH }}/error.log;
+    access_log {{ .Env.NGINX_LOGS_FILES_PATH }}/access.log test;
+
+    gzip on;
+    gzip_disable "msie6";
+
+    include {{ .Env.NGINX_ADDITIONAL_FILES_PATH }}/*.conf;
+
+    server {
+        listen 80;
+        server_name perspectiv_hybrid;
+        client_max_body_size 50M;
+        add_header Expires "-1";
+        add_header Cache-Control "no-cache, must-revalidate, private";
+
+        root /opt/forcom/perspectiv;
+        
+        # Any route containing a file extension (e.g. /devicesfile.js)
+		location ~ ^.+\..+$ {
+			try_files $uri = 404;
+		}
+
+		# Any route that doesn't have a file extension (e.g. /devices)
+		location / {
+		    index index.html;
+			try_files $uri /index.html;
+		}
+        
+    }
+}
