@@ -28,7 +28,7 @@
     "install": "^0.12.2",
     "material-design-icons": "^3.0.1",
     "ngx-translate-multi-http-loader": "^3.0.0",
-    "npm": "^6.14.5",
+    "npm": "^9.6.6",
     "roboto-fontface": "^0.10.0",
     "rxjs": "6.5.5",
     "tslib": "^1.13.0",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.6",
-    "@angular/cli": "^9.1.6",
+    "@angular/cli": "^16.0.0",
     "@angular/compiler-cli": "^9.1.7",
     "@angular/language-service": "^9.1.7",
     "@babel/highlight": "^7.9.0",
